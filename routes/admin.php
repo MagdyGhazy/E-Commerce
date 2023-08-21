@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Dashboard\CategoriesController;
+use App\Http\Controllers\Dashboard\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +20,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/admin', function () {
     return view('dashboard.index');
 })->name('admin');
-Route::put('settings/{settings}/update',[\App\Http\Controllers\Dashboard\SettingsController::class,'update'])->name('settings.update');
-Route::get('settings',[\App\Http\Controllers\Dashboard\SettingsController::class,'index'])->name('settings');
-
+Route::group(['as' => 'dashboard.'], function () {
+    Route::put('settings/{setting}/update',[SettingsController::class , 'update'])->name('settings.update');
+    Route::get('settings',[SettingsController::class , 'index'])->name('settings.index');
+    Route::get('categories/ajax',[CategoriesController::class , 'getall'])->name('categories.getall');
+    Route::delete('categories/delete',[CategoriesController::class , 'delete'])->name('categories.delete');
+    Route::resource('categories', CategoriesController::class)->except('destroy','create' , 'show');
+});
 

@@ -8,7 +8,7 @@ use Intervention\Image\Facades\Image;
 
 class ImageUpload
 {
-    public static function uploadImage($request,$width=null,$height=null,$path=null){
+    public static function uploadImage($request,$path=null,$width=null,$height=null){
 
         $imageNmae = str::uuid().'.'.date('y-m-d').'.'.$request->extension();
         [$widthDefault , $heightDefault] = getimagesize($request);
@@ -18,9 +18,9 @@ class ImageUpload
         $image->fit($width, $height, function ($constraint) {
             $constraint->upsize();
         })->stream();
-        storage::disk('public')->put('img/'.$path.$imageNmae,$image);
+        storage::disk('image')->put('img/'.$path.$imageNmae,$image);
 
-        return 'public/img/'.$path.$imageNmae;
+        return 'img/'.$path.$imageNmae;
     }
 
 }

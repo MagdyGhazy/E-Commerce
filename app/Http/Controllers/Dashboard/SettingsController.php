@@ -21,11 +21,11 @@ class SettingsController extends Controller
         $settings->update($request->validated());
 
         if ($request->has('logo')){
-            $logo = ImageUpload::uploadImage($request->logo,200,200,'logo/');
+            $logo = ImageUpload::uploadImage($request->logo,'logo/');
             $settings->update(['logo'=>$logo]);
         }
         if ($request->has('favicon')){
-            $favicon = ImageUpload::uploadImage($request->favicon,200,200,'favicon/');
+            $favicon = ImageUpload::uploadImage($request->favicon,'favicon/',200,200);
             $settings->update(['favicon'=>$favicon]);
         }
 

@@ -4,7 +4,7 @@
         <div class="logo-wrapper">
             <a href="{{route('admin')}}">
                 <img class="d-none d-lg-block blur-up lazyloaded" src="{{asset($setting->logo)}}"
-                     alt="" style="width: 50% ; margin-right: 25%">
+                     alt="" style="max-height: 125px">
             </a>
         </div>
     </div>
@@ -39,11 +39,6 @@
                             <i class="fa fa-circle"></i>الأقسام
                         </a>
                     </li>
-                    <li>
-                        <a href="transactions.html">
-                            <i class="fa fa-circle"></i>Transactions
-                        </a>
-                    </li>
                 </ul>
             </li>
 
@@ -57,12 +52,12 @@
                 </a>
                 <ul class="sidebar-submenu">
                     <li>
-                        <a href="order.html">
+                        <a href="{{route('dashboard.products.index')}}">
                             <i class="fa fa-circle"></i>المنتجات
                         </a>
                     </li>
                     <li>
-                        <a href="transactions.html">
+                        <a href="{{route('dashboard.products.create')}}">
                             <i class="fa fa-circle"></i>اضافة منتج
                         </a>
                     </li>

@@ -10,7 +10,7 @@ use Yajra\DataTables\Facades\DataTables;
 class CategoryService
 {
 
-public $categoryRepository;
+    public $categoryRepository;
     public function __construct(CategoryRepository $repo)
     {
         $this->categoryRepository = $repo;
@@ -61,7 +61,7 @@ public $categoryRepository;
 
     public function datatable()
     {
-        $query = Category::select('*')->with('parent');
+        $query = $this->categoryRepository->baseQuery(['parent']);
         return  DataTables::of($query)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
@@ -89,5 +89,9 @@ public $categoryRepository;
             ->make(true);
     }
 
+    public function getAll()
+    {
+        return $this->categoryRepository->baseQuery(['child'])->get();
+    }
 
 }
